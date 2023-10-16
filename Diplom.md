@@ -95,6 +95,26 @@
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/6f40ca2f-9bb9-4637-8546-49fd8814dd92)  
 
+2. Задеплоим тестовое приложение на кластер при помощи qbec:
+
+Приготовим конфигурацию qbec для prod-среды: 
+
+Запустим валидацию конфигурации:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/15dfc86b-def3-406a-a40f-d4172fb7edf6)  
+
+Задеплоим приложение и убедимся что все работает:  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/7d1d883f-5395-4857-84d0-c845b0161d19)  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/cd17d841-12e7-4d30-aa48-331db64f285c)  
+
+
+
+
+
+
+
 
 
 
