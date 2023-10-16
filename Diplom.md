@@ -18,13 +18,11 @@
 
 1. Для выполнения задачи использую созданный ранее сервисный аккаунт sa-terraform:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/896f7b91-af03-4908-8a96-1a4e5d293410)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/1643ce13-645c-4ae0-b1c1-bf486075ff1f)  
 
 2. Для хранения базы состояний terraform создаем S3 бакет на yandex.cloud:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/deac702e-c0a7-4b0a-9447-6ebe7e3d397f)  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/7ec20c1c-e44e-4c91-92ae-aed93587d43f)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/529fe36b-9194-407e-ace3-efb789c42b78)  
 
 3. Теперь все готово для создания инфраструктуры для наших кластеров. При помощи terraform создадим два окружения: stage и prod  
 
@@ -32,26 +30,25 @@
 
 - Состав инфраструктуры для обоих сред идентичный: 1 мастер и 2 воркера  
 
-4. Создаем 2 workspaces:  
+4. Создаем 2 workspaces (stage и prod):  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/8b4e7216-67cf-4659-b4ec-6429de3904f2)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/9367577e-1fb5-4b96-869b-ed1300eca0c9)  
 
-5. Делаем terraform plan чтобы убедиться в отсутствии ошибок и корректности применяемых настроек:  
+5. Создаем инфраструктуру (на примере контура prod):  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/36763208-18c6-4e28-a656-e6fe682ec59f)  
+'''
+terraform workspace set stage
+terraform plan
+terraform apply
 
-6. Создаем инфраструктуру (на примере контура prod):  
+terraform workspace set prod
+terraform plan
+terraform apply
+''' 
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/93c6a3fa-eb79-40cf-a46c-c53eb887b366)  
+6. Готово. Заходим в консоль Яндекс.Облака чтобы убедиться, что инфраструктура создана корректно:  
 
-Зайдем на web-интерфейс приложения:  
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/88989066-8d48-49ee-a9fe-cb2643908db2)  
-
-
-7. Готово. Заходим в консоль Яндекс.Облака чтобы убедиться, что инфраструктура создана корректно:  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/a8f17658-7e1a-48e7-b679-641e317bd061)  
-
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/2b6cbf34-cd36-404f-93e4-dfa098579250)  
 
 
 ### Создание Kubernetes кластера  
@@ -61,26 +58,20 @@
 
 1. Готовим inventory следующим образом:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/10976e2e-41bd-4c8b-8773-b419279d968c)  
-
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/2f05c244-f495-427c-b9c1-d280ec63f7c2)  
+ 
 2. Добавляем внешние адреса кластера в файл hosts локальной машины (где выполняется kubespray):  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/82b27c99-f7e6-4249-b093-44ad55d2074c)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/dbe20f16-6d80-4bbd-b070-85645185d44f)  
 
+3. Делаем необходимые настройки в файлах k8s-cluster.yml, addons.yml, all.yml и запускаем установку кластера.
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/032b2748-28d1-4d20-a6b3-3c2f68930abf)  
 
-3. Делаем необходимые настройки в файлах k8s-cluster.yml, addons.yml, all.yml и запускаем установку кластера:  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/cff8ca15-6d9b-4b5b-b381-4665f3613f99)  
-
-4. Установка выполнена:  
- ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/7886ba17-d9fe-4eab-9863-425c98fecdfa)  
-
-6. Заходим на мастер и проверяем работоспособность кластера:  
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/35b13013-6b41-4d1f-86bc-a12c553b075f)  
+4. Заходим на мастер и проверяем работоспособность кластера:  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/225d1dda-afcd-4d95-a44b-cf3106d7766c)  
 
 7. Реквизиты доступа к кластеру:  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/6f678c57-aeca-4f4d-a80f-1b07857e6d7f)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/b63c9797-b0a8-4fed-8dc8-4abd0afa2f22)  
 
 
 ### Создание тестового приложения  
@@ -93,9 +84,13 @@
 ### Подготовка cистемы мониторинга и деплой приложения  
 <a name="four"></a>
 
-1. Деплоим в кластер [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [alertmanager](https://github.com/prometheus/alertmanager), [экспортер](https://github.com/prometheus/node_exporter) основных метрик Kubernetes. Для решения данной задачи возмользуемся пакетом kube-prometheus:  
+1. Деплоим в кластер [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [alertmanager](https://github.com/prometheus/alertmanager), [экспортер](https://github.com/prometheus/node_exporter) основных метрик Kubernetes. Для решения данной задачи возмользуемся пакетом kube-prometheus.
+Выполняем установку при помощи команд:
+```
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/26251df0-d0c9-41d9-9e8f-bbd39cfd575e)  
+```
+
+
 
 Убедимся что все поды и сервисы поднялись:  
 
