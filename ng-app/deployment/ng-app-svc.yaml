@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: svc-nginx-app-stage
+  name: nginx-app-stage
+  namespace: ng-app
+spec:
+  ports:
+  - name: http
+    nodePort: 30080
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx-app-stage
+  sessionAffinity: None
+  type: NodePort
