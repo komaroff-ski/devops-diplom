@@ -85,30 +85,30 @@ terraform apply
 <a name="four"></a>
 
 1. Деплоим в кластер [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [alertmanager](https://github.com/prometheus/alertmanager), [экспортер](https://github.com/prometheus/node_exporter) основных метрик Kubernetes. Для решения данной задачи возмользуемся пакетом kube-prometheus.
-Выполняем установку при помощи команд:
+Выполняем установку:
 ```
-
+kubectl apply --server-side -f manifests/setup
+kubectl wait \
+	--for condition=Established \
+	--all CustomResourceDefinition \
+	--namespace=monitoring
+kubectl apply -f manifests/
 ```
-
-
 
 Убедимся что все поды и сервисы поднялись:  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/f150e231-94c5-499a-aa60-2eee0a6f7bd4)  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/95d28f6a-770e-4023-956a-4c2d17801065)  
-
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/c5c948fc-00e1-4fc9-84af-26c67041fac4)  
+ 
 Опубликуем Grafana наружу с помощью port-forward:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/9cee8827-b449-4778-b6ea-fcb2bd028de4)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/69526ac0-5e17-47aa-8f42-e0ffb3e1203b)  
 
 Зайдем на Grafana и убедимся что метрики получаются и визуализируются:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/6f40ca2f-9bb9-4637-8546-49fd8814dd92)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/df13dd5f-a0aa-429c-bbf3-fd701c0ea375)  
 
-2. Задеплоим тестовое приложение на кластер при помощи qbec:  
+2. Задеплоим тестовое приложение на кластер при помощи qbec. 
 
-Приготовим конфигурацию qbec для prod-среды: 
+Приготовим конфигурацию qbec для prod-среды: https://github.com/komaroff-ski/devops-diplom/blob/main/qbec/stage/components/nginx.jsonnet  
 
 Запустим валидацию конфигурации:  
 
