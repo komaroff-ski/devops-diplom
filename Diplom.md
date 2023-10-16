@@ -34,7 +34,7 @@
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/9367577e-1fb5-4b96-869b-ed1300eca0c9)  
 
-5. Создаем инфраструктуру (на примере контура prod):  
+5. Создаем инфраструктуру:  
 
 ```
 terraform workspace set stage
