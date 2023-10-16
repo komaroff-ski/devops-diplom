@@ -111,10 +111,75 @@
 
 
 
+### Установка и настройка CI/CD
+
+В качестве CI/CD будем использовать Managed Service for GitLab от Yandex.Cloud.
+
+С вашего позволения, я немного отошел от базового сценария с использованием qbec, и, в качестве эксперимента, для сборки приложения на stage-среду использовал связку kaniko +  gitlab-runner for kubernates, а для деплоя - образ kubectl.
+
+1. Добавим gitlab runner на kubernetes
+
+Зайдем в настройки CI/CD и скопируем регистрационный токен:  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/567fc9a2-b24e-48b4-8a49-14f49c0801ab)  
+
+Для установки и регистрации раннера, на мастере нашего кластера выполним команду:
+
+```
+helm install gitlab-runner --namespace ng-app   --set gitlabUrl=https://ksggit.gitlab.yandexcloud.net   --set runnerRegistrationToken=GR1348941B1t5YuyCUoFzVs_Bz12o   --set rbac.create=true   gitlab/gitlab-runner
+```
+
+Зайдем в интерфейс gitlab и убедимся что runner зарегистрирован и готов к работе  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/d92cffe9-d9b2-44db-ade6-ad0ccacc7e02)
 
 
+Создадим переменные, которые будут необходимы для выполнения скриптов:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/0038e0db-557c-4db5-930e-c36c95c1900e)
+
+KUBECONFIG - конфигурация для доступа к нашему кластеру
+MY_REGISTRY - index.docker.io
+MY_REGISTRY_PASSWORD и MY_REGISTRY_USER - реквизиты доступа к регистру
+
+Сконфигурируем pipeline следующим образом:
+a. При любом коммите происходит сборка образа и отправка в dockerhub c тегом, содержащий короткий хэш коммита
+b. в случае, когда происходит коммит с тегом:
+-  мы собираем образ и отправляем его в dockerhub с соотвествующим тегом, а так же его копию с тегом latest
+-  делаем деплой нашего приложения в кластер с использованием kubectl
+-  принудительно перезапускаем под. т.к. для контейнера приложения мы применяем политику imagePullPolicy: Always, в случае, если версия latest изменила свой хэш, кластер принудительно обновит образ из регистра.  
+
+Ссылка на файл gitlab-ci: https://github.com/komaroff-ski/devops-diplom/blob/main/ng-app/.gitlab-ci.yml  
+
+Демонстрация работы:  
+
+1. Исходная версия приложения:  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/0a693742-2a1b-4d34-8fbb-38243a45987a)
+
+2. Внесем изменения в код и сделаем коммит:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/0e6a95f0-fa8a-4739-b250-4deb60b638d9) 
+
+3. Посмотрим jobs
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/6eec7e3a-9219-4be0-9555-74b3d493b20a)  
+
+4. Запушим тег
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/82ff43ca-e92f-4f1e-ad70-c6a4a867654a)  
+
+5. Посмотрим jobs
+
+build:  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/72ecbda3-4c42-458e-ad94-9703050bb148)
 
 
+deploy:  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/cfb71d72-3b01-4cb4-b965-2168286118a2)
 
+6. Убедимся, что теперь работает новая версия приложения:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/df49e8e5-7546-46d7-98de-7bdbe6c60f52)
 
 
