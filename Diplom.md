@@ -8,7 +8,7 @@
 4. [Подготовка cистемы мониторинга и деплой приложения](#four)  
 5. [Установка и настройка CI/CD](#five)  
 
-Ссылка на репозиторий со всем исходным кодом: https://github.com/komaroff-ski/devops-diplom  
+Ссылка на репозиторий с исходным кодом проекта: https://github.com/komaroff-ski/devops-diplom  
 
 
 
