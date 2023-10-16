@@ -30,7 +30,7 @@
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/93c6a3fa-eb79-40cf-a46c-c53eb887b366)
 
-
+Зайдем на web-интерфейс приложения:
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/88989066-8d48-49ee-a9fe-cb2643908db2)
 
 
