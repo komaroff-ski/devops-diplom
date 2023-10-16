@@ -11,6 +11,8 @@
 Ссылка на репозиторий со всем исходным кодом: https://github.com/komaroff-ski/devops-diplom  
 
 
+
+
 ### Создание облачной инфраструктуры  
 <a name="one"></a>
 
