@@ -112,14 +112,13 @@ kubectl apply -f manifests/
 
 Запустим валидацию конфигурации:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/15dfc86b-def3-406a-a40f-d4172fb7edf6)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/7fd3a8b9-112a-4436-9ffd-beb968096d37)  
 
 Задеплоим приложение и убедимся что все работает:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/7d1d883f-5395-4857-84d0-c845b0161d19)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/78cac1f1-abeb-42e3-82eb-34c9cb313f66)
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/cd17d841-12e7-4d30-aa48-331db64f285c)  
-
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/55840f41-ca43-48eb-b91e-b566896ad088)
 
 
 ### Установка и настройка CI/CD  
@@ -133,7 +132,7 @@ kubectl apply -f manifests/
 
 Зайдем в настройки CI/CD и скопируем регистрационный токен:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/567fc9a2-b24e-48b4-8a49-14f49c0801ab)  
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/e202f9d3-f766-48c0-8c22-df61cb9926b2)  
 
 Для установки и регистрации раннера, на мастере нашего кластера выполним команду:  
 
@@ -142,13 +141,11 @@ helm install gitlab-runner --namespace ng-app   --set gitlabUrl=https://ksggit.g
 ```
 
 Зайдем в интерфейс gitlab и убедимся что runner зарегистрирован и готов к работе  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/d92cffe9-d9b2-44db-ade6-ad0ccacc7e02)
-
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/e9ed3166-a3c9-4ecf-9e23-8148be41117f)  
 
 Создадим переменные, которые будут необходимы для выполнения скриптов:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/0038e0db-557c-4db5-930e-c36c95c1900e)
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/1ff988fa-ef4c-4e35-abba-2d29e319701c)  
 
 KUBECONFIG - конфигурация для доступа к нашему кластеру  
 MY_REGISTRY - index.docker.io  
@@ -167,31 +164,26 @@ b. в случае, когда происходит коммит с тегом:
 
 1. Исходная версия приложения:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/0a693742-2a1b-4d34-8fbb-38243a45987a)
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/12d54715-b7bb-48e2-99c8-733d475f79ea)  
 
-2. Внесем изменения в код и сделаем коммит:  
+2. Внесем изменения в код и сделаем коммит. Посмотрим jobs:  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/0e6a95f0-fa8a-4739-b250-4deb60b638d9) 
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/8edca3e6-42d8-4364-8aef-797a7cf37ff1)  
 
-3. Посмотрим jobs  
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/6eec7e3a-9219-4be0-9555-74b3d493b20a)  
-
-4. Запушим тег  
-
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/82ff43ca-e92f-4f1e-ad70-c6a4a867654a)  
-
-5. Посмотрим jobs  
+4. Запушим тег и посмотрим jobs:  
 
 build:  
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/72ecbda3-4c42-458e-ad94-9703050bb148)
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/da30e12c-e139-436d-9c01-bd4a3a8789c5)
 
 
 deploy:  
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/cfb71d72-3b01-4cb4-b965-2168286118a2)
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/deff4786-8561-42ae-9449-c93491af286c)
+
 
 6. Убедимся, что теперь работает новая версия приложения:
 
-![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/df49e8e5-7546-46d7-98de-7bdbe6c60f52)
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/be772282-5994-4e08-b95a-431695ced0e5)  
+
 
 
