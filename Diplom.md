@@ -36,7 +36,7 @@
 
 5. Создаем инфраструктуру (на примере контура prod):  
 
-'''
+```
 terraform workspace set stage
 terraform plan
 terraform apply
@@ -44,7 +44,7 @@ terraform apply
 terraform workspace set prod
 terraform plan
 terraform apply
-''' 
+``` 
 
 6. Готово. Заходим в консоль Яндекс.Облака чтобы убедиться, что инфраструктура создана корректно:  
 
