@@ -1,0 +1,7 @@
+*.zip
+*.tar.gz
+*.rar
+id_rsa
+id_rsa.pub
+authorized_key.json
+.terraform/*
