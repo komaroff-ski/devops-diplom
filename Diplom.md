@@ -103,7 +103,7 @@ kubectl apply -f manifests/
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/69526ac0-5e17-47aa-8f42-e0ffb3e1203b)  
 
-Зайдем на Grafana и убедимся что метрики получаются и визуализируются:  
+Зайдем в Grafana и убедимся что метрики получаются и визуализируются:  
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/df13dd5f-a0aa-429c-bbf3-fd701c0ea375)  
 
