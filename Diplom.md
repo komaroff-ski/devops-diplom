@@ -28,7 +28,7 @@
 
 - ссылка на код terraform для создания окружения: https://github.com/komaroff-ski/devops-diplom/tree/main/infra  
 
-- Состав инфраструктуры для обоих сред идентичный: 1 мастер и 2 воркера  
+- Состав инфраструктуры для обеих сред идентичный: 1 мастер и 2 воркера  
 
 4. Создаем 2 workspaces (stage и prod):  
 
@@ -37,11 +37,11 @@
 5. Создаем инфраструктуру:  
 
 ```
-terraform workspace set stage
+terraform workspace select stage
 terraform plan
 terraform apply
 
-terraform workspace set prod
+terraform workspace select prod
 terraform plan
 terraform apply
 ``` 
@@ -84,8 +84,9 @@ terraform apply
 ### Подготовка cистемы мониторинга и деплой приложения  
 <a name="four"></a>
 
-1. Деплоим в кластер [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [alertmanager](https://github.com/prometheus/alertmanager), [экспортер](https://github.com/prometheus/node_exporter) основных метрик Kubernetes. Для решения данной задачи возмользуемся пакетом kube-prometheus.
-Выполняем установку:
+1. Деплоим в кластер [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [alertmanager](https://github.com/prometheus/alertmanager), [экспортер](https://github.com/prometheus/node_exporter) основных метрик Kubernetes. Для решения данной задачи возпользуемся пакетом kube-prometheus.  
+
+Выполним установку:  
 ```
 kubectl apply --server-side -f manifests/setup
 kubectl wait \
@@ -93,7 +94,7 @@ kubectl wait \
 	--all CustomResourceDefinition \
 	--namespace=monitoring
 kubectl apply -f manifests/
-```
+```  
 
 Убедимся что все поды и сервисы поднялись:  
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/c5c948fc-00e1-4fc9-84af-26c67041fac4)  
