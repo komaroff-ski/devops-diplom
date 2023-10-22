@@ -5,7 +5,7 @@ id_rsa
 id_rsa.pub
 authorized_key.json
 # Local .terraform directories
-**/.terraform/*
+#**/.terraform/*
 
 # .tfstate files
 *.tfstate
