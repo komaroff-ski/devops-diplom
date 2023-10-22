@@ -6,5 +6,5 @@ spec:
   environments:
     ng-app:
       defaultNamespace: ng-app
-      server: https://158.160.59.176:6443
+      server: https://51.250.14.210:6443
   vars: {}
