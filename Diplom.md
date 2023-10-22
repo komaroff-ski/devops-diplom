@@ -195,7 +195,7 @@ deploy:
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/f2bf4dc8-dc15-4c32-999e-33a99f3c4e77)  
 
-Убедмся, что runner добавлен в gitlab:
+Убедимся, что runner добавлен в gitlab:
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/87ce42ae-1c32-43a6-89b1-e5ab6fc1c48b)  
 
@@ -218,7 +218,7 @@ terrarofm_apply_after_push:
 P.S. 
 
 Я понимаю, что по сравнению с функционалом Atlantis это достаточно примитивный способ, но, к сожалению, мне не удалось заставить работать этот
-продук за разумное время. После нескольких попыток, мне удалось задеплоить атлантис на мой кластер и связать его с gilhub webhooк:  
+продукт за разумное время. После нескольких попыток, мне удалось задеплоить атлантис на мой кластер и связать его с github webhooк:  
 
 Deployment для atlantis: https://github.com/komaroff-ski/devops-diplom/blob/main/atlantis/deployment.yaml  
 
@@ -230,7 +230,7 @@ Deployment для atlantis: https://github.com/komaroff-ski/devops-diplom/blob/m
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/038b9978-a121-44b5-801e-e05ad0b36aa1)  
 
-Но к сожалению, мне так и не удалось добиться того, чтобы атлантис создавал push-request и далее отрабатывал по своему workflow.  
+Но, к сожалению, мне так и не удалось добиться того, чтобы атлантис создавал push-request и далее отрабатывал по своему workflow.  
 При любом push в мой репозиторий, webhook получает вот такой ответ:
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/5538f00d-ee09-483e-acaf-2d971c62058a)
