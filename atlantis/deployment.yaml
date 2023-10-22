@@ -19,7 +19,7 @@ spec:
         image: ghcr.io/runatlantis/atlantis:v0.26.0 # 1. Replace <VERSION> with the most recent release.
         env:
         - name: ATLANTIS_REPO_ALLOWLIST
-          value: github.com/komaroff-ski/devops-diplom/* # 2. Replace this with your own repo allowlist.
+          value: github.com/komaroff-ski/* # 2. Replace this with your own repo allowlist.
 
         ### GitHub Config ###
         - name: ATLANTIS_GH_USER
