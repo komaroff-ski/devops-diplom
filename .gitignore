@@ -3,9 +3,6 @@
 *.rar
 id_rsa
 id_rsa.pub
-authorized_key.json
-# Local .terraform directories
-**/.terraform/providers/*
 
 # .tfstate files
 *.tfstate

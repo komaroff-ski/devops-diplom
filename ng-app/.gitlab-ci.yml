@@ -39,6 +39,16 @@ build_after_tagged:
         --dockerfile "${CI_PROJECT_DIR}/Dockerfile" \
         --destination "${MY_REGISTRY}/komaroffski/ng-app:$latest"
 
+terrarofm_apply_after_push:
+  stage: build
+  script: 
+    - cd $CI_PROJECT_DIR/$TF_PATH/
+    - terraform workspace select stage
+    - terraform apply -auto-approve
+    - terraform workspace select prod
+    - terraform apply -auto-approve
+
+
 deploy_after_tagged:
   stage: deploy
   only:
