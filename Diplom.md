@@ -188,7 +188,7 @@ deploy:
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/be772282-5994-4e08-b95a-431695ced0e5)  
 
 
-### автоматический запуск и применение конфигурации terraform   
+### Автоматический запуск и применение конфигурации terraform   
 <a name="six"></a>
 
 Для выполнения данного задания, зарегистрируем и запустим gitlab-runner на машине с установленным terraform:  
