@@ -6,7 +6,8 @@
 2. [Создание Kubernetes кластера](#two)  
 3. [Создание тестового приложения](#three)  
 4. [Подготовка cистемы мониторинга и деплой приложения](#four)  
-5. [Установка и настройка CI/CD](#five)  
+5. [Установка и настройка CI/CD](#five)
+6. [автоматический запуск и применение конфигурации terraform](#six)
 
 Ссылка на репозиторий с исходным кодом проекта: https://github.com/komaroff-ski/devops-diplom  
 
@@ -185,6 +186,56 @@ deploy:
 6. Убедимся, что теперь работает новая версия приложения:
 
 ![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/be772282-5994-4e08-b95a-431695ced0e5)  
+
+
+### автоматический запуск и применение конфигурации terraform   
+<a name="six"></a>
+
+Для выполнения данного задания, зарегистрируем и запустим gitlab-runner на машине с установленным terraform:  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/f2bf4dc8-dc15-4c32-999e-33a99f3c4e77)  
+
+Убедмся, что runner добавлен в gitlab:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/87ce42ae-1c32-43a6-89b1-e5ab6fc1c48b)  
+
+Зарегистрируем переменную TF_PATH с относительным путем до нашего кода terraform и добавим в файл gitlab-ci.yaml следующий код:  
+```
+terrarofm_apply_after_push:
+  stage: build
+  script: 
+    - cd $CI_PROJECT_DIR/$TF_PATH/
+    - terraform workspace select stage
+    - terraform apply -auto-approve
+    - terraform workspace select prod
+    - terraform apply -auto-approve
+```
+
+Сделаем пуш в репозиторий и убедимся, что конфигурация terraform применяется корректно:  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/470e3df3-20cd-4465-ab93-cdf438bf11d2)  
+
+P.S. 
+
+Я понимаю, что по сравнению с функционалом Atlantis это достаточно примитивный способ, но, к сожалению, мне не удалось заставить работать этот
+продук за разумное время. После нескольких попыток, мне удалось задеплоить атлантис на мой кластер и связать его с gilhub webhooк:  
+
+Deployment для atlantis: https://github.com/komaroff-ski/devops-diplom/blob/main/atlantis/deployment.yaml  
+
+Скрины, подтверждающие работу сервиса:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/29136045-77ad-435b-9af8-5cece273191b)  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/fdad5cfc-63d5-4f07-84ef-3276fa6a6cf8)  
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/038b9978-a121-44b5-801e-e05ad0b36aa1)  
+
+Но к сожалению, мне так и не удалось добиться того, чтобы атлантис создавал push-request и далее отрабатывал по своему workflow.  
+При любом push в мой репозиторий, webhook получает вот такой ответ:
+
+![image](https://github.com/komaroff-ski/devops-diplom/assets/93157702/5538f00d-ee09-483e-acaf-2d971c62058a)
+
+В документации не смог найти решения данной проблемы, поэтому, ввиду ограниченного времени, реализовал функционал с использованием gitlab-ci
 
 
 
