@@ -28,7 +28,7 @@ locals {
     stage ="ru-central1-a"
   }
   cores = {
-    prod = 4
+    prod = 2
     stage = 2
  }
   memory = {
